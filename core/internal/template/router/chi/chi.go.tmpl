@@ -1,0 +1,34 @@
+{{define "chi"}}
+	r := chi.NewRouter()
+
+	r.Route("/v1", func(r chi.Router) {
+
+		r.Route("/", func(r chi.Router) {
+			r.Use(app.AuthMiddleware)
+
+			// Users Resource
+			r.Get("/users/profile", app.GetUserProfileHandler)
+
+			r.Delete("/users/delete", app.DeleteUserAccountHandler)
+		})
+
+		// Public Routes
+		r.Get("/ping", app.PingHandler)
+
+		r.Get("/swagger/*", httpSwagger.Handler(
+			httpSwagger.URL(app.SwaggerUrl)))
+
+		r.Get("/categories", app.GetCategoriesHandler)
+
+		r.Route("/authentication", func(r chi.Router) {
+
+			r.Post("/sign-up", app.SignUpHandler)
+
+			r.Post("/activation/{token}", app.ActivateAccountHandler)
+
+			r.Post("/sign-in", app.SignInHandler)
+
+		})
+
+	})
+{{end}}

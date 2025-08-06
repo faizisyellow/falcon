@@ -8,9 +8,9 @@ import (
 )
 
 type ModelResult struct {
-	Cursor   int
-	Choices  []string
-	Question int
+	Cursor  int
+	Choices []string
+	Next    int
 }
 
 // options based the questions index.
@@ -45,28 +45,28 @@ func (m ModelResult) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		case "enter":
 			// Send the Choices on the channel and exit.
-			m.Choices = append(m.Choices, options[m.Question][m.Cursor])
+			m.Choices = append(m.Choices, options[m.Next][m.Cursor])
 
 			// if the question is the last one, quit
-			if len(questions)-1 == m.Question {
+			if len(questions)-1 == m.Next {
 				return m, tea.Quit
 			}
 
-			m.Question++
+			m.Next++
 			m.Cursor = 0
 
 			return m, nil
 
 		case "down", "j":
 			m.Cursor++
-			if m.Cursor >= len(options[m.Question]) {
+			if m.Cursor >= len(options[m.Next]) {
 				m.Cursor = 0
 			}
 
 		case "up", "k":
 			m.Cursor--
 			if m.Cursor < 0 {
-				m.Cursor = len(options[m.Question]) - 1
+				m.Cursor = len(options[m.Next]) - 1
 			}
 		}
 	}
@@ -77,14 +77,14 @@ func (m ModelResult) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 func (m ModelResult) View() string {
 	s := strings.Builder{}
 	s.WriteString("\n")
-	s.WriteString(header(questions[m.Question]))
+	s.WriteString(header(questions[m.Next]))
 	s.WriteString("\n\n")
 
-	for i := 0; i < len(options[m.Question]); i++ {
+	for i := 0; i < len(options[m.Next]); i++ {
 		if m.Cursor == i {
-			s.WriteString(list(lipgloss.JoinHorizontal(lipgloss.Left, "(•) ", options[m.Question][i])))
+			s.WriteString(list(lipgloss.JoinHorizontal(lipgloss.Left, "(•) ", options[m.Next][i])))
 		} else {
-			s.WriteString(lipgloss.JoinHorizontal(lipgloss.Left, "( ) ", options[m.Question][i]))
+			s.WriteString(lipgloss.JoinHorizontal(lipgloss.Left, "( ) ", options[m.Next][i]))
 		}
 		s.WriteString("\n")
 	}
