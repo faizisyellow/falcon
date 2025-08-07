@@ -4,8 +4,11 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss/v2"
+	"github.com/faizisyellow/falcon/internal/generate"
 	"github.com/faizisyellow/falcon/internal/tui"
 	"github.com/spf13/cobra"
 )
@@ -24,13 +27,22 @@ var initCmd = &cobra.Command{
 
 		options := &Options{}
 
+		dir, err := os.Getwd()
+		if err != nil {
+			return err
+		}
+
+		projectName := args[0]
+
+		dst := fmt.Sprintf("%s/%s", dir, projectName)
+
 		withDefault, err := cmd.Flags().GetBool("yes")
 		if err != nil {
 			return err
 		}
 
 		if withDefault {
-			options.Router = "Echo"
+			options.Router = "Chi"
 			options.Db = "Mysql"
 
 		} else {
@@ -41,18 +53,22 @@ var initCmd = &cobra.Command{
 			m, err := p.Run()
 			if err != nil {
 				log.Fatal(err)
-				os.Exit(1)
 			}
 
 			// Assert the final tea.Model to our local model and print the choice.
-			if m, ok := m.(tui.ModelResult); ok && len(m.Choices) != 0 {
+			if m, ok := m.(tui.ModelResult); ok && len(m.Choices) >= 2 {
 				options.Router = m.Choices[0]
 				options.Db = m.Choices[1]
 			}
 
 		}
 
-		fmt.Printf("You choose router: %v and db: %v\n", options.Router, options.Db)
+		err = generate.GenerateNewProject(dst, []string{strings.ToLower(options.Router), strings.ToLower(options.Db)})
+		if err != nil {
+			return err
+		}
+
+		fmt.Println(lipgloss.NewStyle().Foreground(lipgloss.Color("#04B575")).SetString("\nSuccess create new project\n").String())
 
 		return nil
 	},
