@@ -1,0 +1,25 @@
+package service
+
+import (
+	"context"
+	"database/sql"
+
+	"{{.Module}}/internal/db"
+	"{{.Module}}/internal/repository"
+)
+
+type Service struct {
+	UsersService interface {
+		RegisterAccount(context.Context, RegisterRequest) (*RegisterResponse, error)
+		ActivateAccount(context.Context, string) error
+		Login(context.Context, LoginRequest) (*repository.UserModel, error)
+		DeleteAccount(context.Context, int) error
+		FindUserById(context.Context, int) (*repository.UserModel, error)
+	}
+}
+
+func New(store repository.Repository, txfnc db.TransFnc, Db *sql.DB) *Service {
+	return &Service{
+		UsersService: &UsersServices{Repository: store, TransFnc: txfnc, Db: Db},
+	}
+}

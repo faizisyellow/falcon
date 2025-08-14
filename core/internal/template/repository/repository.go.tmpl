@@ -1,0 +1,32 @@
+package repository
+
+import (
+	"context"
+	"database/sql"
+	"time"
+)
+
+type Repository struct {
+	Users interface {
+		Insert(context.Context, *sql.Tx, UserModel) (int, error)
+		GetById(context.Context, int) (UserModel, error)
+		GetByEmail(context.Context, string) (UserModel, error)
+		Update(context.Context, *sql.Tx, UserModel) error
+		Delete(context.Context, *sql.Tx, int) error
+	}
+	Invitation interface {
+		Insert(context.Context, *sql.Tx, InvitationModel) error
+		Get(context.Context, *sql.Tx, string) (int, error)
+		DeleteByUserId(context.Context, *sql.Tx, int) error
+	}
+}
+
+const QueryTimeout = time.Second * 5
+
+func New(db *sql.DB) *Repository {
+
+	return &Repository{
+		Users:      &UsersRepository{Db: db},
+		Invitation: &InvitationRepository{Db: db},
+	}
+}

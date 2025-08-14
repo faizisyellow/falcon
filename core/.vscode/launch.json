@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Cobra CLI",
+            "type": "go",
+            "request": "launch",
+            "mode": "debug",
+            "program": "${workspaceFolder}/main.go",
+            "args": ["init", "command", "-y"],
+            "env": {},
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
