@@ -5,9 +5,9 @@
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/faizisyellow/falcon)
 
-Falcon is a CLI tool to generate GO REST APIs
-the generated project already comes with Authentication,
-Swagger documentation and following Handler-Service-Repository Pattern.
+Falcon is a CLI tool to generate GO REST APIs.
+The generated project already comes with Authentication,
+Swagger documentation, Zap logger and following Handler-Service-Repository Pattern.
 
 ## Features
 
@@ -37,6 +37,12 @@ Download it in:
     sudo mv falcon /usr/local/bin/
     ```
 
+## Overview Project Structure
+
+![sturcture](assets/images/falcon-structure.png)
+
+> The **cmd** directory is where your REST APIs application's live. 
+
 ## Usage
 
 Let's get started shall we?
@@ -50,21 +56,31 @@ Let's get started shall we?
    
 3. Run :
     
-    ``` Go mod tidy ```.
+    ```
+    Go mod tidy 
+    ```
 
 4. Rename **.env.sample** to **.env** and fill in the environment variable.
 5. Run migration :
 
-    ```make migrate-up ```
+    ```
+    make migrate-up
+    ```
     
     make sure you already create a database.
     
 6. Run swag doc generator :
     
-    ```make gen-docs``` 
+    ```
+    make gen-docs
+    ``` 
 
 7. Run air to started the server :
 
-    ``` air ```
+    ```
+    air
+    ```
     
    Your swagger documentation now in <http://localhost:8080/v1/swagger/index.html>
+
+See more commands in ``` Falcon --help ```  
