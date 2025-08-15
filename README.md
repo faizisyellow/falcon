@@ -3,7 +3,7 @@
 ![falcon logo](/assets/images/falcon-logo-icon.png)
 
 
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/faizisyellow/falcon)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/faizisyellow/falcon)
 
 Falcon is a CLI tool for generating Go REST APIs. 
 The generated project already includes authentication, 
