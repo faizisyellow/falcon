@@ -1,6 +1,6 @@
 ## Falcon
 
-![falcon logo](/assets/images/falcon-logo.png)
+![falcon logo](/assets/images/falcon-logo-icon.png)
 
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/faizisyellow/falcon)
@@ -41,13 +41,24 @@ Download it in:
 
 ![sturcture](assets/images/falcon-structure.png)
 
-> The **cmd** directory is where your REST APIs application's live. 
+> **cmd/api** directory is where your REST APIs application's live.
+>
+> **cmd/migrate/migrations** directory where you create sql quearies.
+>
+> **docs** directory is the swagger docs generated.
+>
+> **internal** directory is where all application local packages  live.
+>
+> **log/log.json** file to log error level to fatal level.
+>
+> **makefile** file to command migration, generate docs etc..
+
 
 ## Usage
 
 Let's get started shall we?
 
-1. Create Go Module in your project directory.
+1. Create Go Module in your project root directory.
 2. Create new project.
 
    ```
