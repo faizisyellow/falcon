@@ -11,16 +11,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const VERSION = "0.1.0"
+const VERSION = "0.1.2"
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "falcon",
-	Short: "Falcon is a Go REST API builder",
+	Short: "Falcon is a CLI GO REST APIs Generator",
 	Long: `
-Falcon is a CLI to build a blueprint Go REST API.
+Falcon is a CLI tool to generate a blueprint Go REST APIs
+following Handler-Service-Repository Pattern.
 With Falcon you don't need to start from sratch to
-structure your REST API.`,
+structure your REST APIs.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
