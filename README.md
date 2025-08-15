@@ -5,9 +5,9 @@
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/faizisyellow/falcon)
 
-Falcon is a CLI tool to generate GO REST APIs.
-The generated project already comes with Authentication,
-Swagger documentation, Zap logger and following Handler-Service-Repository Pattern.
+Falcon is a CLI tool for generating Go REST APIs. 
+The generated project already includes authentication, 
+Swagger documentation, the Zap logger, and follows the Handler–Service–Repository pattern.
 
 ## Features
 
@@ -43,7 +43,7 @@ Download it in:
 
 > **cmd/api** directory is where your REST APIs application's live.
 >
-> **cmd/migrate/migrations** directory where you create sql quearies.
+> **cmd/migrate/migrations** directory is where you create sql quearies.
 >
 > **docs** directory is the swagger docs generated.
 >
@@ -51,7 +51,7 @@ Download it in:
 >
 > **log/log.json** file to log error level to fatal level.
 >
-> **makefile** file to command migration, generate docs etc..
+> **makefile** file to command migration, generate swagger doc, etc..
 
 
 ## Usage
