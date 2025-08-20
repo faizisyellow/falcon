@@ -94,4 +94,7 @@ Let's get started shall we?
     
    Your swagger documentation now in <http://localhost:8080/v1/swagger/index.html>
 
-See more commands in ``` Falcon --help ```  
+See more commands in 
+```
+Falcon --help
+```  
