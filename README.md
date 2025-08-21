@@ -94,6 +94,8 @@ Let's get started shall we?
     
    Your swagger documentation now in <http://localhost:8080/v1/swagger/index.html>
 
+8. **(Optional)** install [soHo cli](https://github.com/faizisyellow/soho) for faster developing CRUD operation.
+
 See more commands in 
 ```
 Falcon --help
